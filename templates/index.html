@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MNIST Digit Classifier</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════
+       SECTION 1 — INTRO (top, no card background)
+  ══════════════════════════════════════════ -->
+  <section class="intro-section">
+    <div class="intro-inner">
+
+      <!-- Left -->
+      <div class="intro-left">
+        <h1 class="intro-title">MNIST Digit Classifier</h1>
+        <p class="intro-subtitle">Recognize handwritten digits using a Neural Network</p>
+        <ul class="intro-list">
+          <li>
+            <span class="list-check">
+              <svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            Draw digits or upload images
+          </li>
+          <li>
+            <span class="list-check">
+              <svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            Real-time prediction using Deep Learning
+          </li>
+          <li>
+            <span class="list-check">
+              <svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            High accuracy model
+          </li>
+        </ul>
+      </div>
+
+      <!-- Right: Brain + digits illustration placeholder -->
+      <div class="intro-right">
+        <div class="intro-illustration">
+          <!-- Floating digit badges -->
+          <div class="digit-badge badge-3-top">3</div>
+          <div class="digit-badge badge-5-top">5</div>
+          <div class="digit-badge badge-3-mid">3</div>
+          <div class="digit-badge badge-2-mid">2</div>
+          <!-- Brain SVG illustration (stylised) -->
+          <div class="brain-wrap">
+            <svg viewBox="0 0 220 180" xmlns="http://www.w3.org/2000/svg">
+              <!-- Monitor / laptop base -->
+              <rect x="38" y="108" width="110" height="62" rx="6" fill="#e8c9c9" opacity="0.7"/>
+              <rect x="44" y="114" width="98" height="48" rx="4" fill="#f5e0e0" opacity="0.9"/>
+              <rect x="62" y="170" width="60" height="6" rx="2" fill="#d4a8a8" opacity="0.6"/>
+              <!-- Screen content: digit 5 -->
+              <text x="93" y="147" text-anchor="middle" font-size="22" fill="#b05050" font-weight="600" font-family="Georgia,serif" opacity="0.8">5</text>
+              <!-- Brain shape (simplified organic) -->
+              <ellipse cx="148" cy="82" rx="52" ry="44" fill="#e8b8b8" opacity="0.55"/>
+              <ellipse cx="148" cy="80" rx="40" ry="34" fill="#e0a8a8" opacity="0.50"/>
+              <!-- brain fold lines -->
+              <path d="M120 70 Q130 60 140 72 Q150 60 160 70" stroke="#c07070" stroke-width="1.5" fill="none" opacity="0.5"/>
+              <path d="M118 85 Q130 75 142 85 Q154 75 166 85" stroke="#c07070" stroke-width="1.5" fill="none" opacity="0.5"/>
+              <path d="M122 98 Q134 90 146 100 Q158 90 168 98" stroke="#c07070" stroke-width="1.5" fill="none" opacity="0.4"/>
+              <!-- Neural dots -->
+              <circle cx="105" cy="80" r="5" fill="#C94A4A" opacity="0.7"/>
+              <circle cx="120" cy="95" r="4" fill="#C94A4A" opacity="0.6"/>
+              <circle cx="132" cy="72" r="5" fill="#C94A4A" opacity="0.7"/>
+              <circle cx="148" cy="88" r="6" fill="#A83232" opacity="0.75"/>
+              <circle cx="162" cy="74" r="4" fill="#C94A4A" opacity="0.6"/>
+              <circle cx="170" cy="92" r="5" fill="#C94A4A" opacity="0.65"/>
+              <!-- Connection lines -->
+              <line x1="105" y1="80" x2="120" y2="95" stroke="#C94A4A" stroke-width="1" opacity="0.35"/>
+              <line x1="120" y1="95" x2="132" y2="72" stroke="#C94A4A" stroke-width="1" opacity="0.35"/>
+              <line x1="132" y1="72" x2="148" y2="88" stroke="#C94A4A" stroke-width="1" opacity="0.40"/>
+              <line x1="148" y1="88" x2="162" y2="74" stroke="#C94A4A" stroke-width="1" opacity="0.35"/>
+              <line x1="162" y1="74" x2="170" y2="92" stroke="#C94A4A" stroke-width="1" opacity="0.35"/>
+              <!-- Stem from brain to monitor -->
+              <line x1="130" y1="120" x2="118" y2="114" stroke="#d4a8a8" stroke-width="2" opacity="0.5"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       SECTION 2 — HOW TO USE
+  ══════════════════════════════════════════ -->
+  <section class="how-section">
+    <div class="card-section">
+      <h2 class="how-title">How to Use</h2>
+      <div class="how-steps">
+
+        <!-- Step 1 -->
+        <div class="step-card">
+          <div class="step-header">
+            <span class="step-num">1</span>
+            <span class="step-label">Draw a digit or<br/>upload an image</span>
+          </div>
+          <div class="step-visual">
+            <div class="step-sketch-area">
+              <!-- Squiggly drawing illustration -->
+              <svg viewBox="0 0 160 60" xmlns="http://www.w3.org/2000/svg">
+                <rect width="160" height="60" fill="white" rx="4"/>
+                <path d="M20 38 Q30 20 40 35 Q50 50 60 30 Q70 15 80 35" stroke="#555" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                <!-- Pencil -->
+                <g transform="translate(95,10) rotate(30)">
+                  <rect x="0" y="0" width="8" height="32" rx="1" fill="#E8A87C"/>
+                  <polygon points="0,32 8,32 4,40" fill="#F5D5C0"/>
+                  <rect x="0" y="0" width="8" height="6" rx="1" fill="#888"/>
+                  <line x1="2" y1="32" x2="4" y2="40" stroke="#C84B32" stroke-width="0.8"/>
+                </g>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Arrow -->
+        <div class="step-arrow">
+          <svg width="28" height="16" viewBox="0 0 28 16"><path d="M0 8H24M18 2L26 8L18 14" stroke="#C94A4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step-card">
+          <div class="step-header">
+            <span class="step-num">2</span>
+            <span class="step-label">Click 'Predict'</span>
+          </div>
+          <div class="step-visual step-visual-center">
+            <button class="step-predict-btn" tabindex="-1">Predict</button>
+          </div>
+        </div>
+
+        <!-- Arrow -->
+        <div class="step-arrow">
+          <svg width="28" height="16" viewBox="0 0 28 16"><path d="M0 8H24M18 2L26 8L18 14" stroke="#C94A4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step-card">
+          <div class="step-header">
+            <span class="step-num">3</span>
+            <span class="step-label">View the predicted<br/>result instantly</span>
+          </div>
+          <div class="step-visual step-visual-center">
+            <div class="step-check-circle">
+              <svg width="28" height="22" viewBox="0 0 28 22" fill="none">
+                <path d="M2 11L10 19L26 3" stroke="#C94A4A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       SECTION 3 — MAIN (Canvas + Prediction)
+  ══════════════════════════════════════════ -->
+  <section class="main-section">
+    <div class="main-grid">
+
+      <!-- LEFT CARD: Canvas -->
+      <div class="card-section canvas-card">
+        <div class="canvas-border-wrap">
+          <canvas id="drawingCanvas" width="280" height="280"></canvas>
+        </div>
+
+        <p class="or-text">or upload an image</p>
+
+        <input type="file" id="imageUpload" accept="image/*" hidden/>
+
+        <button class="full-btn btn-upload" id="uploadBtn">Upload Image</button>
+        <button class="full-btn btn-clear"  id="clearBtn">Clear</button>
+
+        <!-- Upload preview (hidden until image uploaded) -->
+        <div id="uploadPreviewBox" class="upload-preview-box" style="display:none;">
+          <img id="uploadedPreview" alt="Uploaded"/>
+          <button id="removeUploadBtn" class="remove-btn" title="Remove">✕</button>
+        </div>
+      </div>
+
+      <!-- RIGHT CARD: Prediction Result -->
+      <div class="card-section result-card">
+        <h3 class="result-title">Prediction Result</h3>
+
+        <div class="result-inner">
+          <!-- Pencil / result icon area -->
+          <div class="result-icon-area" id="resultIconArea">
+            <svg id="pencilIcon" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M34 6L42 14L16 40H8V32L34 6Z" stroke="#C94A4A" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
+              <path d="M28 12L36 20" stroke="#C94A4A" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+            <!-- Big digit shown after prediction -->
+            <div class="result-big-digit" id="resultBigDigit" style="display:none;"></div>
+          </div>
+
+          <p class="prediction-text">
+            Prediction: <span class="prediction-value" id="predictionValue">_</span>
+          </p>
+          <p class="prediction-hint" id="predictionHint">Draw or upload a digit to see the prediction</p>
+        </div>
+
+        <button class="full-btn btn-predict" id="predictBtn">Predict</button>
+
+        <!-- Loading -->
+        <div id="loadingIndicator" class="loading-row" style="display:none;">
+          <div class="spinner"></div>
+          <span>Analyzing…</span>
+        </div>
+
+        <!-- Error -->
+        <div id="errorMsg" class="error-box" style="display:none;"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       SECTION 4 — ABOUT THE MODEL
+  ══════════════════════════════════════════ -->
+  <section class="about-section">
+    <div class="card-section about-card">
+      <h2 class="about-title">About the Model</h2>
+      <div class="about-tags">
+        <div class="about-tag">
+          <span class="tag-key">Model:</span>
+          <span class="tag-val">Neural Network</span>
+        </div>
+        <div class="about-tag">
+          <span class="tag-key">Dataset:</span>
+          <span class="tag-val">MNIST</span>
+        </div>
+        <div class="about-tag">
+          <span class="tag-key">Input:</span>
+          <span class="tag-val">28×28 grayscale</span>
+        </div>
+        <div class="about-tag">
+          <span class="tag-key">Output:</span>
+          <span class="tag-val">Digit (0–9)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
