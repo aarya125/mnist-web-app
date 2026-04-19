@@ -2,7 +2,7 @@ flask
 numpy
 pandas
 scikit-learn
-tensorflow
+tensorflow-cpu
 gunicorn
 pillow
 opencv-python
